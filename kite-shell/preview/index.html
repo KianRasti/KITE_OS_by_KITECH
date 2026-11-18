@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KITE_OS Glass Shell Simulator — HP Folio 9480m</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F172A'/%3E%3Cpath d='M7 7h8v8H7zm10 0h8v8h-8zM7 17h8v8H7zm10 0h8v8h-8z' fill='%2338BDF8'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div id="desktop-root" data-hw-tier="8G" data-power="AC" data-blur-mode="kawase_2pass" data-wallpaper="aero-glass-wave">
+    <!-- Top Hardware & Shortcut Simulator HUD -->
+    <header id="sim-hud" data-testid="sim-hud" class="glass-surface">
+      <div class="hud-group">
+        <span class="hud-label">RAM Tier</span>
+        <div class="segmented" role="group" aria-label="RAM Tier">
+          <button type="button" class="hud-btn" data-testid="hw-ram-4G" data-ram="4G">4G</button>
+          <button type="button" class="hud-btn is-active" data-testid="hw-ram-8G" data-ram="8G">8G</button>
+          <button type="button" class="hud-btn" data-testid="hw-ram-16G" data-ram="16G">16G</button>
+        </div>
+      </div>
+
+      <div class="hud-group">
+        <span class="hud-label">Power</span>
+        <div class="segmented" role="group" aria-label="Power Source">
+          <button type="button" class="hud-btn is-active" data-testid="hw-power-ac" data-power="AC">AC</button>
+          <button type="button" class="hud-btn" data-testid="hw-power-battery" data-power="Battery">Battery</button>
+        </div>
+      </div>
+
+      <div class="hud-telemetry" data-testid="hw-telemetry">
+        8G · AC · Dual-Kawase 2-pass (size=6, xray=true) · ~350 MB idle · 60 FPS
+      </div>
+
+      <div class="hud-group hud-hotkeys">
+        <button type="button" class="hud-btn" data-testid="hotkey-win" title="Alt+S / Meta">Win</button>
+        <button type="button" class="hud-btn" data-testid="hotkey-win-a" title="Alt+A">Win+A</button>
+        <button type="button" class="hud-btn" data-testid="hotkey-win-n" title="Alt+N">Win+N</button>
+        <button type="button" class="hud-btn" data-testid="hotkey-win-z" title="Alt+Z">Win+Z</button>
+        <button type="button" class="hud-btn" data-testid="hotkey-win-i" title="Alt+I">Win+I</button>
+      </div>
+    </header>
+
+    <!-- Desktop Canvas -->
+    <main id="desktop-canvas" data-testid="desktop-canvas">
+      <div class="wallpaper-layer" aria-hidden="true"></div>
+
+      <!-- Desktop Shortcut Icons -->
+      <div class="desktop-icons" aria-label="Desktop Shortcuts">
+        <button type="button" class="desktop-icon" data-launch="kite-settings">
+          <span class="icon-glyph">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          </span>
+          <span>kite-settings</span>
+        </button>
+        <button type="button" class="desktop-icon" data-launch="kitebridge">
+          <span class="icon-glyph">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></svg>
+          </span>
+          <span>KiteBridge</span>
+        </button>
+        <button type="button" class="desktop-icon" data-launch="terminal">
+          <span class="icon-glyph">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </span>
+          <span>Terminal</span>
+        </button>
+        <button type="button" class="desktop-icon" data-launch="android">
+          <span class="icon-glyph">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="6" y="7" width="12" height="12" rx="3"/><line x1="9" y1="4" x2="10.5" y2="7"/><line x1="15" y1="4" x2="13.5" y2="7"/></svg>
+          </span>
+          <span>Play [Android]</span>
+        </button>
+      </div>
+
+      <!-- Window 1: kite-settings Studio -->
+      <section class="app-window glass-surface" id="win-kite-settings" data-window-id="kite-settings" data-testid="kite-settings-window" data-active="true" data-open="true" data-maximized="false" data-snap-zone="none">
+        <div class="window-titlebar">
+          <div class="window-title-left">
+            <span class="badge badge-linux">Linux</span>
+            <strong>kite-settings Studio</strong>
+          </div>
+          <div class="window-controls">
+            <button type="button" class="win-btn" data-testid="window-snap-btn" data-action="snap" title="Snap Layouts (Win+Z)">&#9638;</button>
+            <button type="button" class="win-btn" data-action="min" title="Minimize">&#8211;</button>
+            <button type="button" class="win-btn" data-action="max" title="Maximize">&#9633;</button>
+            <button type="button" class="win-btn win-close" data-action="close" title="Close">&#10005;</button>
+          </div>
+        </div>
+
+        <div class="studio-body">
+          <aside class="studio-sidebar" aria-label="Settings Categories">
+            <button type="button" class="cat-btn" data-cat="system">System</button>
+            <button type="button" class="cat-btn" data-cat="bluetooth">Bluetooth &amp; devices</button>
+            <button type="button" class="cat-btn" data-cat="network">Network &amp; internet</button>
+            <button type="button" class="cat-btn is-active" data-cat="personalization">Personalization</button>
+            <button type="button" class="cat-btn" data-cat="apps">Apps &amp; KiteBridge</button>
+            <button type="button" class="cat-btn" data-cat="performance">Performance &amp; Hardware</button>
+            <button type="button" class="cat-btn" data-cat="ai-indexing" data-testid="cat-ai-indexing">AI &amp; Indexing</button>
+            <button type="button" class="cat-btn" data-cat="accounts">Accounts</button>
+            <button type="button" class="cat-btn" data-cat="update">System Update</button>
+          </aside>
+
+          <div class="studio-content">
+            <!-- Personalization Pane -->
+            <div class="studio-pane is-active" data-pane="personalization">
+              <div class="pane-section">
+                <h3>Glass Preset Themes</h3>
+                <div class="preset-grid">
+                  <button type="button" class="preset-card is-active" data-testid="preset-aero-blue" data-preset="Aero Blue">
+                    <span class="swatch" style="background:#38BDF8"></span>
+                    <span>Aero Blue</span>
+                  </button>
+                  <button type="button" class="preset-card" data-testid="preset-frosted-obsidian" data-preset="Frosted Obsidian">
+                    <span class="swatch" style="background:#818CF8"></span>
+                    <span>Frosted Obsidian</span>
+                  </button>
+                  <button type="button" class="preset-card" data-testid="preset-emerald-glass" data-preset="Emerald Glass">
+                    <span class="swatch" style="background:#10B981"></span>
+                    <span>Emerald Glass</span>
+                  </button>
+                  <button type="button" class="preset-card" data-testid="preset-sunset-mica" data-preset="Sunset Mica">
+                    <span class="swatch" style="background:#FB923C"></span>
+                    <span>Sunset Mica</span>
+                  </button>
+                  <button type="button" class="preset-card" data-testid="preset-ultra-light-flat" data-preset="Ultra-Light Flat">
+                    <span class="swatch" style="background:#60A5FA"></span>
+                    <span>Ultra-Light Flat</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="pane-section controls-grid">
+                <label class="control-row">
+                  <span>Transparency <strong id="val-transparency">0.72</strong></span>
+                  <input type="range" data-testid="slider-transparency" id="slider-transparency" min="0.20" max="1.00" step="0.01" value="0.72" />
+                </label>
+                <label class="control-row">
+                  <span>Blur Radius <strong id="val-blur">6px</strong></span>
+                  <input type="range" data-testid="slider-blur" id="slider-blur" min="0" max="16" step="1" value="6" />
+                </label>
+                <label class="control-row">
+                  <span>Specular Edge <strong id="val-specular">0.35</strong></span>
+                  <input type="range" data-testid="slider-specular" id="slider-specular" min="0.00" max="1.00" step="0.01" value="0.35" />
+                </label>
+                <label class="control-row">
+                  <span>Corner Radius <strong id="val-radius">12px</strong></span>
+                  <input type="range" data-testid="slider-radius" id="slider-radius" min="0" max="24" step="1" value="12" />
+                </label>
+                <label class="control-row">
+                  <span>Animation Speed <strong id="val-anim-speed">1.00x</strong></span>
+                  <input type="range" data-testid="slider-anim-speed" id="slider-anim-speed" min="0.00" max="2.00" step="0.05" value="1.00" />
+                </label>
+                <label class="control-row">
+                  <span>Spring Curve</span>
+                  <select data-testid="select-spring-curve" id="select-spring-curve">
+                    <option value="cubic-bezier(0.22, 1.0, 0.36, 1.0)">Snappy (Aero/Obsidian)</option>
+                    <option value="cubic-bezier(0.16, 1.0, 0.3, 1.0)">Smooth (Emerald)</option>
+                    <option value="cubic-bezier(0.25, 1.0, 0.5, 1.0)">Gentle (Sunset Mica)</option>
+                    <option value="cubic-bezier(0.2, 0.0, 0.0, 1.0)">Linear / Flat</option>
+                  </select>
+                </label>
+              </div>
+
+              <div class="pane-section inline-controls">
+                <div class="control-inline">
+                  <span>Taskbar Alignment</span>
+                  <div class="segmented">
+                    <button type="button" class="hud-btn is-active" data-testid="setting-align-center" id="setting-align-center">Center</button>
+                    <button type="button" class="hud-btn" data-testid="setting-align-left" id="setting-align-left">Left</button>
+                  </div>
+                </div>
+                <label class="control-inline">
+                  <span>Accent</span>
+                  <input type="color" data-testid="input-accent-color" id="input-accent-color" value="#38BDF8" />
+                </label>
+                <label class="control-inline">
+                  <span>Wallpaper</span>
+                  <select data-testid="select-wallpaper" id="select-wallpaper">
+                    <option value="aero-glass-wave">Aero Glass Wave</option>
+                    <option value="obsidian-minimal-mesh">Obsidian Minimal Mesh</option>
+                    <option value="emerald-aurora">Emerald Aurora</option>
+                    <option value="sunset-mica-horizon">Sunset Mica Horizon</option>
+                    <option value="ultra-light-slate">Ultra-Light Slate</option>
+                  </select>
+                </label>
+                <label class="control-inline">
+                  <input type="checkbox" data-testid="toggle-battery-autosimplify" id="toggle-battery-autosimplify" checked />
+                  <span>Battery Glass Auto-Simplify</span>
+                </label>
+              </div>
+
+              <div class="pane-section inspector-grid">
+                <div>
+                  <h4>~/.config/hypr/kite-glass-runtime.conf</h4>
+                  <pre class="code-preview" data-testid="runtime-conf-preview"></pre>
+                </div>
+                <div>
+                  <h4>~/.config/kite-os/settings.json</h4>
+                  <pre class="code-preview" data-testid="settings-json-preview"></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- Performance & Hardware Pane -->
+            <div class="studio-pane" data-pane="performance">
+              <div class="pane-section">
+                <h3>HP Folio 9480m Bento Hardware Telemetry</h3>
+                <div class="bento-grid" data-testid="bento-grid">
+                  <div class="bento-card" data-testid="bento-gpu">
+                    <span class="bento-label">Intel HD 4400 GPU Pins</span>
+                    <strong id="bento-gpu-val">OpenGL: crocus · VA-API: i965</strong>
+                    <span class="muted">Vulkan 1.2 (anv) · Blur: <span id="bento-blur-val">2-pass (size=6)</span></span>
+                  </div>
+                  <div class="bento-card" data-testid="bento-zram">
+                    <span class="bento-label">ZRAM &amp; Memory Tier</span>
+                    <strong id="bento-zram-val">8G Tier · 100% zstd</strong>
+                    <span class="muted">swappiness=150 · ~345 MB idle</span>
+                  </div>
+                  <div class="bento-card" data-testid="bento-bridge">
+                    <span class="bento-label">KiteBridge Runtimes</span>
+                    <strong id="bento-bridge-val">DXVK 1.10.3 + ntsync</strong>
+                    <span class="muted">Waydroid cgroup_freeze · OSX-KVM</span>
+                  </div>
+                  <div class="bento-card" data-testid="bento-ai">
+                    <span class="bento-label">Kite AI Index &amp; Socket</span>
+                    <strong id="bento-ai-val">0 MB idle (kite-aid.socket)</strong>
+                    <span class="muted" id="bento-ai-sub">SQLite FTS5 + SimHash · &le;400 tok</span>
+                  </div>
+                </div>
+              </div>
+              <div class="pane-section">
+                <h3>Kernel CPU &amp; Storage</h3>
+                <p class="muted">CPU: Haswell ULT i5-4310U · Btrfs compress=zstd:1,noatime (@, @home, @kitebridge, @snapshots)</p>
+                <label class="control-inline">
+                  <input type="checkbox" data-testid="toggle-mitigations-off" id="toggle-mitigations-off" />
+                  <span>Request kernel <code>mitigations=off</code> (Optional, reboot required)</span>
+                </label>
+                <div class="warning-box" data-testid="mitigations-warning" hidden>
+                  SECURITY WARNING: Disabling speculative execution mitigations (mitigations=off) exposes this Haswell CPU to Spectre, Meltdown, MDS, and L1TF side-channel risks. Requires reboot.
+                </div>
+              </div>
+            </div>
+
+            <!-- AI & Indexing Pane -->
+            <div class="studio-pane" data-pane="ai-indexing" data-testid="pane-ai-indexing">
+              <div class="pane-section controls-grid">
+                <label class="control-row">
+                  <span>BYOK Cloud Provider</span>
+                  <select data-testid="ai-provider-select" id="ai-provider-select">
+                    <option value="offline">Offline (Tier 0 FTS5 Only)</option>
+                    <option value="gemini">Gemini (BYOK)</option>
+                    <option value="openai">OpenAI (BYOK)</option>
+                    <option value="anthropic">Anthropic (BYOK)</option>
+                    <option value="groq">Groq (BYOK)</option>
+                    <option value="openrouter">OpenRouter (BYOK)</option>
+                  </select>
+                </label>
+                <label class="control-row">
+                  <span>Keyring API Key (Masked)</span>
+                  <input type="password" data-testid="ai-api-key-input" id="ai-api-key-input" placeholder="sk-... / AIza... (kernel keyring)" />
+                </label>
+                <label class="control-row">
+                  <span>Token Budget <strong id="val-ai-budget">400 tok</strong></span>
+                  <input type="range" data-testid="ai-token-slider" id="ai-token-slider" min="150" max="800" step="10" value="400" />
+                </label>
+                <div class="control-row">
+                  <span>Session Cost Counter</span>
+                  <strong data-testid="ai-session-cost" id="ai-session-cost">0 tokens ($0.000000)</strong>
+                </div>
+              </div>
+              <div class="pane-section">
+                <h4>.kiteignore Privacy Guardrail</h4>
+                <textarea class="code-preview kiteignore-editor" data-testid="ai-kiteignore-editor" id="ai-kiteignore-editor" rows="4">.ssh/
+.gnupg/
+.env
+.env.*
+.mozilla/firefox/
+.config/chromium/</textarea>
+              </div>
+            </div>
+
+            <!-- Other Category Panes -->
+            <div class="studio-pane" data-pane="system">
+              <div class="pane-section">
+                <h3>System</h3>
+                <p class="muted">eDP-1 1366x768 / 1600x900 @ 60Hz · PipeWire IDT 92HD91BXX · Btrfs compress=zstd:1,noatime (@, @home, @kitebridge, @snapshots)</p>
+              </div>
+            </div>
+            <div class="studio-pane" data-pane="bluetooth">
+              <div class="pane-section">
+                <h3>Bluetooth &amp; devices</h3>
+                <p class="muted">Intel Wireless 7260 Bluetooth · Synaptics LuxPad Trackpad &amp; TrackPoint · Validity VFS495 Fingerprint</p>
+              </div>
+            </div>
+            <div class="studio-pane" data-pane="network">
+              <div class="pane-section">
+                <h3>Network &amp; internet</h3>
+                <p class="muted">Intel Wireless 7260 (iwlwifi) · Intel I218-LM Gigabit Ethernet (e1000e)</p>
+              </div>
+            </div>
+            <div class="studio-pane" data-pane="apps">
+              <div class="pane-section">
+                <h3>Apps &amp; KiteBridge</h3>
+                <p class="muted">[Win] Wine-CachyOS + ntsync + DXVK 1.10.3 · [Android] Waydroid Multi-Window · [macOS] Darling + OSX-KVM Haswell</p>
+              </div>
+            </div>
+            <div class="studio-pane" data-pane="accounts">
+              <div class="pane-section">
+                <h3>Accounts</h3>
+                <p class="muted">Unified ~/Desktop, ~/Documents, and ~/Downloads shared across Linux, Wine, Waydroid, and OSX-KVM VirtIO-FS.</p>
+              </div>
+            </div>
+            <div class="studio-pane" data-pane="update">
+              <div class="pane-section">
+                <h3>System Update</h3>
+                <p class="muted">Arch Linux / CachyOS x86-64-v3 · Pre-update Btrfs @snapshots hook active.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Window 2: KiteBridge Files & Launcher -->
+      <section class="app-window glass-surface" id="win-kitebridge" data-window-id="kitebridge" data-testid="window-kitebridge" data-active="false" data-open="true" data-maximized="false" data-snap-zone="none">
+        <div class="window-titlebar">
+          <div class="window-title-left">
+            <span class="badge badge-linux">Linux</span>
+            <strong>KiteBridge Universal Launcher</strong>
+          </div>
+          <div class="window-controls">
+            <button type="button" class="win-btn" data-testid="window-snap-btn" data-action="snap" title="Snap Layouts">&#9638;</button>
+            <button type="button" class="win-btn" data-action="min">&#8211;</button>
+            <button type="button" class="win-btn" data-action="max">&#9633;</button>
+            <button type="button" class="win-btn win-close" data-action="close">&#10005;</button>
+          </div>
+        </div>
+        <div class="window-content">
+          <p class="muted">Universal MIME &amp; Subsystem Dispatch on HP Folio 9480m:</p>
+          <ul class="bridge-list">
+            <li><span class="badge badge-win">[Win]</span> <code>installer.exe</code> — Wine-CachyOS + <code>/dev/ntsync</code> + <strong>DXVK 1.10.3</strong></li>
+            <li><span class="badge badge-android">[Android]</span> <code>app-release.apk</code> — Waydroid multi-window + <code>binder_linux</code></li>
+            <li><span class="badge badge-macos">[macOS]</span> <code>XcodeTool.dmg</code> — <code>darling-dmg</code> / <code>apfs-fuse</code> + OSX-KVM</li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- Window 3: Terminal (hidden until launched) -->
+      <section class="app-window glass-surface" id="win-terminal" data-window-id="terminal" data-testid="window-terminal" data-active="false" data-open="false" data-maximized="false" data-snap-zone="none" hidden>
+        <div class="window-titlebar">
+          <div class="window-title-left">
+            <span class="badge badge-linux">Linux</span>
+            <strong>foot Terminal</strong>
+          </div>
+          <div class="window-controls">
+            <button type="button" class="win-btn" data-testid="window-snap-btn" data-action="snap">&#9638;</button>
+            <button type="button" class="win-btn" data-action="min">&#8211;</button>
+            <button type="button" class="win-btn" data-action="max">&#9633;</button>
+            <button type="button" class="win-btn win-close" data-action="close">&#10005;</button>
+          </div>
+        </div>
+        <div class="window-content">
+          <pre class="code-preview">MESA_LOADER_DRIVER_OVERRIDE=crocus
+LIBVA_DRIVER_NAME=i965
+DXVK_VER=1.10.3
+CPU: Haswell-ULT i5-4310U | GPU: Intel HD 4400 GT2</pre>
+        </div>
+      </section>
+
+      <!-- Window 4: Waydroid Android App (hidden until launched) -->
+      <section class="app-window glass-surface" id="win-android" data-window-id="android" data-testid="window-android" data-active="false" data-open="false" data-maximized="false" data-snap-zone="none" hidden>
+        <div class="window-titlebar">
+          <div class="window-title-left">
+            <span class="badge badge-android">[Android]</span>
+            <strong>Waydroid Multi-Window</strong>
+          </div>
+          <div class="window-controls">
+            <button type="button" class="win-btn" data-testid="window-snap-btn" data-action="snap">&#9638;</button>
+            <button type="button" class="win-btn" data-action="min">&#8211;</button>
+            <button type="button" class="win-btn" data-action="max">&#9633;</button>
+            <button type="button" class="win-btn win-close" data-action="close">&#10005;</button>
+          </div>
+        </div>
+        <div class="window-content">
+          <p>Running in <code>persist.waydroid.multi_windows=true</code> via <code>binder_linux</code>.</p>
+        </div>
+      </section>
+
+      <!-- Flyout 1: Start Menu -->
+      <section id="start-menu" data-testid="start-menu" class="flyout glass-surface" role="dialog" aria-label="Start Menu" aria-hidden="true" hidden>
+        <div class="start-header">
+          <input type="search" id="start-search-input" data-testid="start-search-input" placeholder="Search apps, [Win]/[Android]/[macOS], .exe/.apk/.dmg..." />
+          <div class="filter-chips">
+            <button type="button" class="chip is-active" data-testid="filter-all" data-filter="all">All</button>
+            <button type="button" class="chip" data-testid="filter-linux" data-filter="linux">Linux</button>
+            <button type="button" class="chip" data-testid="filter-win" data-filter="win">[Win]</button>
+            <button type="button" class="chip" data-testid="filter-android" data-filter="android">[Android]</button>
+            <button type="button" class="chip" data-testid="filter-macos" data-filter="macos">[macOS]</button>
+            <button type="button" class="chip" data-testid="start-all-apps-toggle" id="start-all-apps-toggle">All apps</button>
+          </div>
+        </div>
+        <div id="start-apps-grid" class="start-apps-grid"></div>
+        <div class="start-footer">
+          <span>kite@folio9480m</span>
+          <div class="start-footer-actions">
+            <button type="button" class="hud-btn" id="start-open-settings">Settings</button>
+            <button type="button" class="hud-btn" data-testid="start-power-btn" id="start-power-btn">Power</button>
+          </div>
+        </div>
+        <div id="power-menu" data-testid="power-menu" class="power-menu" hidden>
+          <button type="button" class="hud-btn" data-power-action="lock">Lock</button>
+          <button type="button" class="hud-btn" data-power-action="sleep">Sleep</button>
+          <button type="button" class="hud-btn" data-power-action="hibernate">Hibernate</button>
+          <button type="button" class="hud-btn" data-power-action="restart">Restart</button>
+          <button type="button" class="hud-btn" data-power-action="shutdown">Shutdown</button>
+        </div>
+      </section>
+
+      <!-- Flyout 2: Quick Settings (Win+A) -->
+      <section id="quick-settings" data-testid="quick-settings" class="flyout glass-surface" role="dialog" aria-label="Quick Settings" aria-hidden="true" hidden>
+        <div class="flyout-title">
+          <strong>Quick Settings</strong>
+          <span class="muted">Win+A</span>
+        </div>
+        <div class="qs-tiles">
+          <button type="button" class="qs-tile is-on" data-qs-toggle="wifi">Wi-Fi (7260)</button>
+          <button type="button" class="qs-tile is-on" data-qs-toggle="bluetooth">Bluetooth</button>
+          <button type="button" class="qs-tile is-on" data-testid="qs-glass-fx-toggle" id="qs-glass-fx-toggle">Glass FX</button>
+          <button type="button" class="qs-tile" data-qs-toggle="nightlight">Night Light</button>
+        </div>
+        <div class="qs-power-modes">
+          <span>Power Mode:</span>
+          <button type="button" class="chip" data-pm="Efficiency">Efficiency</button>
+          <button type="button" class="chip is-active" data-pm="Balanced">Balanced</button>
+          <button type="button" class="chip" data-pm="Turbo">Turbo</button>
+        </div>
+        <div class="qs-sliders">
+          <label class="control-row">
+            <span>Brightness</span>
+            <input type="range" min="10" max="100" value="80" id="qs-brightness" />
+          </label>
+          <label class="control-row">
+            <span>Master Volume (PipeWire)</span>
+            <input type="range" min="0" max="100" value="72" id="qs-volume" />
+          </label>
+        </div>
+        <div class="qs-mixer">
+          <h4>Per-App PipeWire Mixer</h4>
+          <label class="control-row"><span>Firefox (Linux)</span><input type="range" min="0" max="100" value="80" data-testid="mixer-firefox" /></label>
+          <label class="control-row"><span>Wine [Win]</span><input type="range" min="0" max="100" value="90" data-testid="mixer-wine" /></label>
+          <label class="control-row"><span>Waydroid [Android]</span><input type="range" min="0" max="100" value="70" data-testid="mixer-waydroid" /></label>
+        </div>
+      </section>
+
+      <!-- Flyout 3: Notifications & Calendar (Win+N) -->
+      <section id="notification-center" data-testid="notification-center" class="flyout glass-surface" role="dialog" aria-label="Notifications and Calendar" aria-hidden="true" hidden>
+        <div class="flyout-title">
+          <strong>Notifications</strong>
+          <button type="button" class="hud-btn" data-testid="notifications-clear-btn" id="notifications-clear-btn">Clear all</button>
+        </div>
+        <div id="notification-list" data-testid="notification-list" class="notification-list"></div>
+        <div id="calendar-widget" data-testid="calendar-widget" class="calendar-widget">
+          <div class="cal-header">
+            <button type="button" class="hud-btn" data-testid="cal-prev" id="cal-prev">&lt;</button>
+            <strong id="cal-month-label">November 2026</strong>
+            <button type="button" class="hud-btn" data-testid="cal-next" id="cal-next">&gt;</button>
+          </div>
+          <div id="cal-grid" class="cal-grid"></div>
+        </div>
+      </section>
+
+      <!-- Flyout 4: Snap Layouts (Win+Z) -->
+      <section id="snap-layouts" data-testid="snap-layouts" class="flyout glass-surface" role="dialog" aria-label="Snap Layouts" aria-hidden="true" hidden>
+        <div class="flyout-title">
+          <strong>Snap Layouts (Win+Z)</strong>
+          <span id="snap-target-label" class="muted">kite-settings Studio</span>
+        </div>
+        <div class="snap-grid">
+          <div class="snap-group">
+            <span>50 / 50 Halves</span>
+            <div class="snap-zones">
+              <button type="button" class="snap-zone" data-snap="left-half">Left 50%</button>
+              <button type="button" class="snap-zone" data-snap="right-half">Right 50%</button>
+            </div>
+          </div>
+          <div class="snap-group">
+            <span>60 / 40 Split</span>
+            <div class="snap-zones">
+              <button type="button" class="snap-zone" data-snap="split-60" style="flex:6">60%</button>
+              <button type="button" class="snap-zone" data-snap="split-40" style="flex:4">40%</button>
+            </div>
+          </div>
+          <div class="snap-group snap-group-wide">
+            <span>Quarters</span>
+            <div class="snap-quarters">
+              <button type="button" class="snap-zone" data-snap="top-left">Top-Left</button>
+              <button type="button" class="snap-zone" data-snap="top-right">Top-Right</button>
+              <button type="button" class="snap-zone" data-snap="bottom-left">Bottom-Left</button>
+              <button type="button" class="snap-zone" data-snap="bottom-right">Bottom-Right</button>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- Flyout 5: AI Spotlight Modal (Win+S / Search Pill) -->
+      <section id="ai-spotlight" data-testid="ai-spotlight" class="flyout glass-surface" role="dialog" aria-label="Kite AI Spotlight" aria-hidden="true" hidden>
+        <div class="flyout-title">
+          <strong>Kite AI Spotlight</strong>
+          <span class="badge badge-linux" data-testid="spotlight-tier-badge" id="spotlight-tier-badge">Tier 0 (0 tokens)</span>
+        </div>
+        <input type="search" id="spotlight-input" data-testid="spotlight-input" placeholder="Ask Kite AI or search indexed files (e.g., capstone greenhouse)..." />
+        <div id="spotlight-results" data-testid="spotlight-results" class="spotlight-results"></div>
+      </section>
+    </main>
+
+    <!-- Floating Glass Taskbar V2 -->
+    <footer id="taskbar" data-testid="taskbar" data-alignment="center" class="glass-surface">
+      <div class="taskbar-left-spacer" aria-hidden="true"></div>
+      <div class="taskbar-dock" data-testid="taskbar-dock">
+        <button type="button" class="tb-start" data-testid="start-button" id="start-button" title="Start Menu">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><rect x="3" y="3" width="8" height="8" rx="1.5"/><rect x="13" y="3" width="8" height="8" rx="1.5" opacity="0.65"/><rect x="3" y="13" width="8" height="8" rx="1.5" opacity="0.65"/><rect x="13" y="13" width="8" height="8" rx="1.5"/></svg>
+        </button>
+        <button type="button" class="tb-search" data-testid="taskbar-search-pill" id="taskbar-search-pill">Ask Kite AI or search files... (Win+S)</button>
+        <button type="button" class="tb-app is-open is-active" data-focus-window="kite-settings" title="kite-settings Studio">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3" fill="currentColor" fill-opacity="0.25"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <span class="tb-pill-dot" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="tb-app is-open" data-focus-window="kitebridge" title="KiteBridge Universal Launcher">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M3 7a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" fill="currentColor" fill-opacity="0.22"/></svg>
+          <span class="tb-pill-dot" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="tb-app" data-focus-window="terminal" title="foot Terminal">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="4" width="18" height="16" rx="3" fill="currentColor" fill-opacity="0.18"/><polyline points="7 15 11 11 7 7"/><line x1="13" y1="15" x2="17" y2="15"/></svg>
+          <span class="tb-pill-dot" aria-hidden="true"></span>
+        </button>
+        <button type="button" class="tb-app" data-focus-window="android" title="Waydroid [Android]">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="6" y="8" width="12" height="10" rx="3" fill="currentColor" fill-opacity="0.22"/><line x1="9" y1="5" x2="10.5" y2="8"/><line x1="15" y1="5" x2="13.5" y2="8"/></svg>
+          <span class="tb-corner-badge badge badge-android">A</span>
+          <span class="tb-pill-dot" aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="taskbar-right-spacer" aria-hidden="true"></div>
+      <div class="taskbar-tray">
+        <button type="button" class="tb-pill" data-testid="taskbar-align-toggle" id="taskbar-align-toggle" title="Toggle Center/Left">CTR</button>
+        <button type="button" class="tb-pill" data-testid="tray-quick-settings" id="tray-quick-settings">Wi-Fi · Vol · AC</button>
+        <button type="button" class="tb-pill" data-testid="tray-notifications" id="tray-notifications">
+          <span id="tray-clock">09:30</span>
+          <span id="tray-notif-count" class="notif-badge">2</span>
+        </button>
+      </div>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

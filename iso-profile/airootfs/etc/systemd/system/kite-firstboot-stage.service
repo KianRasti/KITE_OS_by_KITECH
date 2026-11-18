@@ -1,0 +1,13 @@
+[Unit]
+Description=KITE_OS First-Boot Monorepo Subsystem Staging
+ConditionPathExists=!/var/lib/kite-os/.staged
+Before=kite-hw-tune.service display-manager.service
+After=local-fs.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash /root/customize_airootfs.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

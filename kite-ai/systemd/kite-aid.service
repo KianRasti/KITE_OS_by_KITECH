@@ -1,0 +1,13 @@
+[Unit]
+Description=Kite AI On-Demand Socket-Activated Service
+Requires=kite-aid.socket
+After=kite-hw-tune.service
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 -m kite_ai ipc-once
+StandardInput=socket
+StandardOutput=socket
+IOSchedulingClass=idle
+Nice=15
+MemoryMax=96M

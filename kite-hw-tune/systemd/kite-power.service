@@ -1,0 +1,14 @@
+[Unit]
+Description=KITE_OS AC/Battery Power & Glass Shader Transition Handler
+After=kite-hw-tune.service
+
+[Service]
+Type=oneshot
+RuntimeDirectory=kite-os
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/local/bin/kite-power --apply
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

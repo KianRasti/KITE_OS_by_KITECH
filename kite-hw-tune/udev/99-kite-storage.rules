@@ -1,0 +1,8 @@
+# KITE_OS HP EliteBook Folio 9480m — Dynamic storage I/O scheduler
+# Skip virtual devices (loop*, ram*, zram*, sr*, dm-*, fd*, md*, nbd*) and partitions
+ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", KERNEL!="loop*|ram*|zram*|sr*|dm-*|fd*|md*|nbd*", ATTR{queue/rotational}=="0", TEST=="queue/scheduler", ATTR{queue/scheduler}=="*kyber*", ATTR{queue/scheduler}="kyber"
+ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", KERNEL!="loop*|ram*|zram*|sr*|dm-*|fd*|md*|nbd*", ATTR{queue/rotational}=="0", TEST=="queue/scheduler", ATTR{queue/scheduler}!="*kyber*", ATTR{queue/scheduler}=="*none*", ATTR{queue/scheduler}="none"
+
+ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", KERNEL!="loop*|ram*|zram*|sr*|dm-*|fd*|md*|nbd*", ATTR{queue/rotational}=="1", TEST=="queue/scheduler", ATTR{queue/scheduler}=="*bfq*", ATTR{queue/scheduler}="bfq"
+ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", KERNEL!="loop*|ram*|zram*|sr*|dm-*|fd*|md*|nbd*", ATTR{queue/rotational}=="1", TEST=="queue/iosched/low_latency", ATTR{queue/iosched/low_latency}="1"
+ACTION=="add|change", SUBSYSTEM=="block", ENV{DEVTYPE}=="disk", KERNEL!="loop*|ram*|zram*|sr*|dm-*|fd*|md*|nbd*", ATTR{queue/rotational}=="1", TEST=="queue/read_ahead_kb", ATTR{queue/read_ahead_kb}="256"

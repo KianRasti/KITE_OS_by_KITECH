@@ -1,0 +1,10 @@
+[Unit]
+Description=Kite AI On-Demand IPC Socket (Zero Idle RAM)
+
+[Socket]
+ListenStream=/run/kite-os/kite-ai.sock
+SocketMode=0660
+Accept=no
+
+[Install]
+WantedBy=sockets.target

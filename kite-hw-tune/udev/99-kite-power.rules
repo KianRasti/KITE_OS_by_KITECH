@@ -1,0 +1,2 @@
+# KITE_OS HP EliteBook Folio 9480m — AC/Battery power supply transitions
+SUBSYSTEM=="power_supply", ACTION=="change|add", ATTR{type}=="Mains", TAG+="systemd", ENV{SYSTEMD_WANTS}="kite-power.service"

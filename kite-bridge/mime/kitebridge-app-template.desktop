@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=[Win] Application Template
+Comment=Launched via KiteBridge Universal Runtime
+Exec=kite-bridge open "%f"
+Icon=kitebridge-win
+Terminal=false
+Categories=Utility;Application;
+X-KiteBridge-Platform=win
+X-KiteBridge-Handler=wine-ntsync
+X-KiteBridge-SourcePath=/var/lib/kitebridge/wine/prefixes/default
+X-KiteBridge-Tag=[Win]

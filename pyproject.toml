@@ -1,0 +1,54 @@
+[project]
+name = "kite-os"
+version = "0.1.0"
+description = "KITE_OS monorepo for the HP EliteBook Folio 9480m (Haswell ULT)"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "PyYAML>=6.0",
+  "jsonschema>=4.20",
+  "playwright>=1.40",
+]
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+testpaths = [
+  "kite-hw-tune/tests",
+  "kite-shell/tests",
+  "kite-bridge/tests",
+  "kite-ai/tests",
+  "installer/tests",
+  "scripts/tests",
+  "tests/e2e",
+]
+pythonpath = [
+  ".",
+  "kite-hw-tune",
+  "kite-bridge",
+  "kite-shell/settings",
+  "kite-ai/src",
+  "installer",
+  "installer/tests",
+]
+norecursedirs = [
+  ".git",
+  ".agents",
+  "out",
+  "work",
+  "iso-profile",
+  "node_modules",
+  "__pycache__",
+  ".pytest_cache",
+]
+addopts = "-ra --strict-markers --import-mode=importlib"
+markers = [
+  "tier1: E2E Tier 1 category-partition tests",
+  "tier2: E2E Tier 2 boundary-value tests",
+  "tier3: E2E Tier 3 pairwise combination tests",
+  "tier4: E2E Tier 4 real-world workload tests",
+  "tier5: E2E Tier 5 adversarial challenger tests",
+]

@@ -1,0 +1,81 @@
+# === Base, Kernel, Firmware & Archiso Infrastructure ===
+base
+systemd
+linux-cachyos
+linux-cachyos-headers
+linux-firmware
+intel-ucode
+btrfs-progs
+zram-generator
+mkinitcpio
+mkinitcpio-archiso
+syslinux
+dosfstools
+mtools
+edk2-shell
+efibootmgr
+squashfs-tools
+arch-install-scripts
+sudo
+cachyos-keyring
+cachyos-mirrorlist
+cachyos-v3-mirrorlist
+
+# === Haswell GT2 (HD 4400) Graphics, Vulkan 1.2 & VA-API (STRICT) ===
+# INVARIANT: Only crocus OpenGL + anv Vulkan 1.2 + libva-intel-driver (i965)
+mesa
+lib32-mesa
+vulkan-intel
+lib32-vulkan-intel
+vulkan-icd-loader
+lib32-vulkan-icd-loader
+libva-intel-driver
+libva-utils
+
+# === Audio (IDT 92HD91BXX via snd_hda_intel + PipeWire) ===
+pipewire
+pipewire-alsa
+pipewire-pulse
+wireplumber
+alsa-utils
+
+# === HP Folio 9480m Peripherals, Networking & Power ===
+# (iwlwifi + btusb via linux-firmware; e1000e in-kernel)
+networkmanager
+bluez
+bluez-utils
+thermald
+upower
+libinput
+fprintd
+acpi
+ethtool
+iw
+wpa_supplicant
+
+# === KITE_OS Glass Shell (Hyprland + Quickshell Qt6/QML) ===
+hyprland
+quickshell
+qt6-base
+qt6-declarative
+xdg-desktop-portal-hyprland
+polkit
+kitty
+thunar
+tumbler
+gvfs
+ttf-dejavu
+noto-fonts
+
+# === KiteBridge Base & Calamares Installer ===
+wine-cachyos
+winetricks
+waydroid
+lxc
+fuse3
+qemu-system-x86
+python
+python-pip
+python-setuptools
+python-yaml
+cachyos-calamares

@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 160" width="240" height="160">
+  <rect x="8" y="8" width="224" height="144" rx="12" fill="#0F172A" stroke="#38BDF8" stroke-opacity="0.45" stroke-width="1.5"/>
+  <rect x="20" y="28" width="60" height="58" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-opacity="0.6"/>
+  <text x="50" y="53" text-anchor="middle" fill="#7DD3FC" font-family="sans-serif" font-size="11" font-weight="700">[Win]</text>
+  <text x="50" y="70" text-anchor="middle" fill="#CBD5E1" font-family="sans-serif" font-size="9">DXVK 1.10.3</text>
+  <rect x="90" y="28" width="60" height="58" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-opacity="0.6"/>
+  <text x="120" y="53" text-anchor="middle" fill="#7DD3FC" font-family="sans-serif" font-size="10" font-weight="700">[Android]</text>
+  <text x="120" y="70" text-anchor="middle" fill="#CBD5E1" font-family="sans-serif" font-size="9">Waydroid</text>
+  <rect x="160" y="28" width="60" height="58" rx="8" fill="#1E293B" stroke="#38BDF8" stroke-opacity="0.6"/>
+  <text x="190" y="53" text-anchor="middle" fill="#7DD3FC" font-family="sans-serif" font-size="10" font-weight="700">[macOS]</text>
+  <text x="190" y="70" text-anchor="middle" fill="#CBD5E1" font-family="sans-serif" font-size="9">OSX-KVM</text>
+  <rect x="28" y="102" width="184" height="34" rx="8" fill="#1E293B" stroke="#FFFFFF" stroke-opacity="0.18"/>
+  <text x="120" y="118" text-anchor="middle" fill="#F8FAFC" font-family="sans-serif" font-size="10" font-weight="600">Btrfs zstd:1,noatime</text>
+  <text x="120" y="131" text-anchor="middle" fill="#38BDF8" font-family="sans-serif" font-size="9">@ | @home | @kitebridge | @snapshots</text>
+</svg>

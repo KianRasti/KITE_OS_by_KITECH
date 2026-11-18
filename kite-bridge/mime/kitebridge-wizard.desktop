@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=KiteBridge Glass Installer Wizard
+Comment=Install and register Windows, Android, and macOS apps into KITE_OS Start Menu
+Exec=kite-bridge install %f
+Icon=kitebridge
+Terminal=false
+NoDisplay=true
+MimeType=application/x-msi;application/vnd.android.package-archive;application/vnd.android.aab;application/x-apple-diskimage;application/x-newton-compatible-pkg;
+Categories=System;Utility;

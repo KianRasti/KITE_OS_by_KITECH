@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kite-hw-tune"
+version = "0.1.0"
+description = "Dynamic hardware auto-tuner and power profile daemon for KITE_OS on HP EliteBook Folio 9480m"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+kite-hw-tune = "kite_hw_tune.cli:main_hw_tune"
+kite-power = "kite_hw_tune.cli:main_power"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["kite_hw_tune*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

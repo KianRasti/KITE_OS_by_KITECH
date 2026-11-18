@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+  <mime-type type="application/x-ms-dos-executable">
+    <comment>Windows PE Executable (KiteBridge [Win])</comment>
+    <magic priority="60">
+      <match type="string" offset="0" value="MZ"/>
+    </magic>
+    <glob pattern="*.exe"/>
+  </mime-type>
+
+  <mime-type type="application/x-msi">
+    <comment>Windows Installer Package (KiteBridge [Win])</comment>
+    <glob pattern="*.msi"/>
+  </mime-type>
+
+  <mime-type type="application/x-bat">
+    <comment>Windows Batch Script (KiteBridge [Win])</comment>
+    <glob pattern="*.bat"/>
+    <glob pattern="*.cmd"/>
+  </mime-type>
+
+  <mime-type type="application/x-ms-shortcut">
+    <comment>Windows Shell Link Shortcut (KiteBridge [Win])</comment>
+    <magic priority="60">
+      <match type="string" offset="0" value="\x4c\x00\x00\x00\x01\x14\x02\x00"/>
+    </magic>
+    <glob pattern="*.lnk"/>
+  </mime-type>
+
+  <mime-type type="application/vnd.android.package-archive">
+    <comment>Android Application Package (KiteBridge [Android])</comment>
+    <glob pattern="*.apk"/>
+  </mime-type>
+
+  <mime-type type="application/vnd.android.aab">
+    <comment>Android App Bundle (KiteBridge [Android])</comment>
+    <glob pattern="*.aab"/>
+  </mime-type>
+
+  <mime-type type="application/x-apple-diskimage">
+    <comment>macOS UDIF Disk Image (KiteBridge [macOS])</comment>
+    <glob pattern="*.dmg"/>
+  </mime-type>
+
+  <mime-type type="application/x-newton-compatible-pkg">
+    <comment>macOS Installer Package (KiteBridge [macOS])</comment>
+    <magic priority="60">
+      <match type="string" offset="0" value="xar!"/>
+    </magic>
+    <glob pattern="*.pkg"/>
+    <glob pattern="*.mpkg"/>
+  </mime-type>
+
+  <mime-type type="application/x-apple-app">
+    <comment>macOS Application Bundle (KiteBridge [macOS])</comment>
+    <glob pattern="*.app"/>
+  </mime-type>
+
+  <mime-type type="application/x-apfs-image">
+    <comment>Apple File System Image (KiteBridge [macOS])</comment>
+    <magic priority="60">
+      <match type="string" offset="32" value="NXSB"/>
+    </magic>
+    <glob pattern="*.apfs"/>
+  </mime-type>
+
+  <mime-type type="application/x-hfsplus-image">
+    <comment>Apple HFS+ Volume Image (KiteBridge [macOS])</comment>
+    <magic priority="60">
+      <match type="string" offset="1024" value="H+"/>
+      <match type="string" offset="1024" value="HX"/>
+    </magic>
+    <glob pattern="*.hfs"/>
+    <glob pattern="*.hfsplus"/>
+  </mime-type>
+</mime-info>

@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.5
+Name=KiteBridge Universal App Runner
+Comment=Open Windows, Android, and macOS applications seamlessly via KiteBridge
+Exec=kite-bridge open %f
+Icon=kitebridge
+Terminal=false
+NoDisplay=true
+MimeType=application/x-ms-dos-executable;application/x-msi;application/x-bat;application/x-ms-shortcut;application/vnd.android.package-archive;application/vnd.android.aab;application/x-apple-diskimage;application/x-newton-compatible-pkg;application/x-apple-app;application/x-apfs-image;application/x-hfsplus-image;
+Categories=System;Utility;

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ThermalConfiguration>
+  <Platform>
+    <Name>HP EliteBook Folio 9480m</Name>
+    <ProductName>HP EliteBook Folio 9480m</ProductName>
+    <Preference>QUIET</Preference>
+    <ThermalZones>
+      <ThermalZone>
+        <Type>x86_pkg_temp</Type>
+        <TripPoints>
+          <TripPoint>
+            <Temperature>75000</Temperature>
+            <Type>passive</Type>
+            <ControlType>PARALLEL</ControlType>
+            <CoolingDevice>
+              <index>1</index>
+              <type>rapl_controller</type>
+              <influence>100</influence>
+              <SamplingPeriod>2</SamplingPeriod>
+            </CoolingDevice>
+            <CoolingDevice>
+              <index>2</index>
+              <type>intel_pstate</type>
+              <influence>50</influence>
+              <SamplingPeriod>2</SamplingPeriod>
+            </CoolingDevice>
+          </TripPoint>
+          <TripPoint>
+            <Temperature>88000</Temperature>
+            <Type>passive</Type>
+            <ControlType>SEQUENTIAL</ControlType>
+            <CoolingDevice>
+              <index>1</index>
+              <type>rapl_controller</type>
+              <influence>100</influence>
+              <SamplingPeriod>1</SamplingPeriod>
+            </CoolingDevice>
+          </TripPoint>
+        </TripPoints>
+      </ThermalZone>
+    </ThermalZones>
+  </Platform>
+</ThermalConfiguration>

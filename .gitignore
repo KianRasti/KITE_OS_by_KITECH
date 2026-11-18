@@ -1,0 +1,28 @@
+# Python & pytest caches
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Archiso build & output artifacts
+work/
+out/
+*.iso
+*.iso.sha256
+
+# Local SQLite / runtime artifacts
+*.db
+*.db-wal
+*.db-shm
+
+# OS / IDE junk
+.DS_Store
+Thumbs.db

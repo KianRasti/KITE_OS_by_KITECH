@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kite-bridge"
+version = "0.1.0"
+description = "KITE_OS Universal App & File Runtime for HP EliteBook Folio 9480m"
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+kite-bridge = "kite_bridge.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["kite_bridge*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

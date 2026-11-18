@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Invoked by Calamares or target chroot post-install to enforce Folio 9480m hardware invariants
+TARGET_ROOT="${1:-/}"
+SRC_ROOT="/opt/kite-os-src"
+
+mkdir -p "${TARGET_ROOT}/etc/environment.d" "${TARGET_ROOT}/var/lib/kitebridge"
+
+cat > "${TARGET_ROOT}/etc/environment.d/10-kite-haswell.conf" <<'EOF'
+MESA_LOADER_DRIVER_OVERRIDE=crocus
+LIBVA_DRIVER_NAME=i965
+EOF
+
+if [[ "${TARGET_ROOT}" == "/" && -f /root/customize_airootfs.sh ]]; then
+  bash /root/customize_airootfs.sh --force
+else
+  if [[ -f "${SRC_ROOT}/kite-hw-tune/install.sh" ]]; then
+    DESTDIR="${TARGET_ROOT}" bash "${SRC_ROOT}/kite-hw-tune/install.sh" --destdir "${TARGET_ROOT}"
+  fi
+  if [[ -f "${SRC_ROOT}/kite-shell/install.sh" ]]; then
+    DESTDIR="${TARGET_ROOT}" bash "${SRC_ROOT}/kite-shell/install.sh" --destdir "${TARGET_ROOT}" --skel
+  fi
+  if [[ -f "${SRC_ROOT}/kite-bridge/install.sh" ]]; then
+    DESTDIR="${TARGET_ROOT}" bash "${SRC_ROOT}/kite-bridge/install.sh" --destdir "${TARGET_ROOT}" --skip-databases
+  fi
+  if [[ -f "${SRC_ROOT}/installer/install.sh" ]]; then
+    KITE_OS_TARGET_ROOT="${TARGET_ROOT}" bash "${SRC_ROOT}/installer/install.sh"
+  fi
+fi

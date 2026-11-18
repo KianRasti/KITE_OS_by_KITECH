@@ -1,0 +1,18 @@
+[Unit]
+Description=KITE_OS Dynamic Hardware Auto-Tuner (HP EliteBook Folio 9480m)
+DefaultDependencies=no
+After=local-fs.target systemd-modules-load.service
+Before=multi-user.target display-manager.service
+ConditionPathExists=/proc/meminfo
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+RuntimeDirectory=kite-os
+RuntimeDirectoryPreserve=yes
+ExecStart=/usr/local/bin/kite-hw-tune apply --all
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

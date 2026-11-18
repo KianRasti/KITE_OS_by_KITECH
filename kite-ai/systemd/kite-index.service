@@ -1,0 +1,10 @@
+[Unit]
+Description=Kite AI Idle Incremental Data Mining Job
+After=kite-hw-tune.service
+
+[Service]
+Type=oneshot
+IOSchedulingClass=idle
+Nice=19
+ExecStart=/usr/bin/ionice -c 3 /usr/bin/python3 -m kite_ai index /home /var/lib/kitebridge
+MemoryMax=128M

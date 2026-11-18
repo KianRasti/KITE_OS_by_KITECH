@@ -1,0 +1,29 @@
+# KITE_OS Kite AI Privacy Guardrail (.kiteignore)
+# Sensitive paths and credential artifacts blocked BEFORE reading file content.
+
+.ssh/
+.ssh/*
+.gnupg/
+.gnupg/*
+.env
+.env.*
+*.env
+*id_rsa*
+*id_ed25519*
+*id_ecdsa*
+*.pem
+*.key
+*.p12
+*.pfx
+*.kdbx
+/etc/shadow
+/etc/gshadow
+/etc/sudoers
+.mozilla/firefox/
+.config/chromium/
+.config/google-chrome/
+.config/BraveSoftware/
+.local/share/keyrings/
+__pycache__/
+.git/
+node_modules/
