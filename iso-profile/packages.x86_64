@@ -23,6 +23,7 @@ cachyos-v3-mirrorlist
 
 # === Haswell GT2 (HD 4400) Graphics, Vulkan 1.2 & VA-API (STRICT) ===
 # INVARIANT: Only crocus OpenGL + anv Vulkan 1.2 + libva-intel-driver (i965)
+core/libffi
 mesa
 lib32-mesa
 vulkan-intel
