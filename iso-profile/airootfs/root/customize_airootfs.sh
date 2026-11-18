@@ -29,6 +29,24 @@ if [[ -d /etc/skel/.config && -d /home/kite ]]; then
   fi
 fi
 
+# Live ISO convenience: passwordless root/kite + tty1 autologin into Hyprland
+passwd -d root >/dev/null 2>&1 || true
+if id kite >/dev/null 2>&1; then
+  passwd -d kite >/dev/null 2>&1 || true
+  mkdir -p /etc/systemd/system/getty@tty1.service.d
+  cat <<'EOF' > /etc/systemd/system/getty@tty1.service.d/autologin.conf
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin kite %I $TERM
+EOF
+  if [[ -d /home/kite ]] && ! grep -q 'exec Hyprland' /home/kite/.bash_profile 2>/dev/null; then
+    cat <<'EOF' >> /home/kite/.bash_profile
+[[ -z "${WAYLAND_DISPLAY:-}" && "$(tty)" == "/dev/tty1" ]] && exec Hyprland
+EOF
+    chown kite:kite /home/kite/.bash_profile || true
+  fi
+fi
+
 if command -v systemctl >/dev/null 2>&1; then
   systemctl daemon-reload || true
   for unit in NetworkManager.service bluetooth.service thermald.service kite-hw-tune.service kite-power.service kite-aid.socket kite-index.timer; do
