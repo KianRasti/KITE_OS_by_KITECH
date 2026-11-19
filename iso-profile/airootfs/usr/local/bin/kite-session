@@ -7,6 +7,11 @@ set -euo pipefail
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/kite-os"
 mkdir -p "${STATE_DIR}"
 
+# 0. Ensure a DBus user session is active (for Notifications, SystemTray, PipeWire)
+if [[ -z "${DBUS_SESSION_BUS_ADDRESS:-}" ]] && command -v dbus-run-session >/dev/null 2>&1; then
+  exec dbus-run-session -- "$0" "$@"
+fi
+
 # 1. Self-heal user shell configs from /etc/skel or /usr/local/share/kite-shell
 CFG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
 if [[ ! -f "${CFG_DIR}/hypr/hyprland.lua" || ! -f "${CFG_DIR}/quickshell/shell.qml" ]]; then
@@ -36,10 +41,12 @@ if [[ "${is_intel_gpu}" -eq 1 ]]; then
   export LIBVA_DRIVER_NAME=i965
 else
   # Virtualized GPU (VMware vmwgfx / QEMU / VirtualBox): avoid Haswell-only overrides
+  # and use Qt6 software Wayland SHM backend to prevent vmwgfx EGL wl_surface.attach errors
   unset MESA_LOADER_DRIVER_OVERRIDE || true
   unset LIBVA_DRIVER_NAME || true
   export AQ_NO_ATOMIC=1
   export WLR_NO_HARDWARE_CURSORS=1
+  export QT_QUICK_BACKEND=software
 fi
 
 export XDG_CURRENT_DESKTOP=Hyprland
