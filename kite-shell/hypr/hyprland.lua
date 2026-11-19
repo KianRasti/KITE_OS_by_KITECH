@@ -15,7 +15,7 @@ hl.config({
         resize_on_border = true,
         allow_tearing = false,
         col = {
-            active_border = "rgba(FFFFFF59) rgba(38BDF866) 45deg",
+            active_border = "rgba(38BDF899)",
             inactive_border = "rgba(FFFFFF22)",
         },
     },
@@ -57,15 +57,7 @@ hl.config({
             disable_while_typing = true,
         },
     },
-    dwindle = {
-        pseudotile = true,
-        preserve_split = true,
-    },
-    master = {
-        new_status = "master",
-    },
     misc = {
-        vfr = true,
         disable_hyprland_logo = true,
         disable_splash_rendering = true,
         force_default_wallpaper = 0,
