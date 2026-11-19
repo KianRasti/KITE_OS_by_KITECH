@@ -14,6 +14,19 @@ ScrollView {
         spacing: 10
 
         GlassCard {
+            title: "KITE_OS™ — Built by KITech"
+            subtitle: "Created by Kian Rasti • portfolio.kitech.info • kian.kitech.info"
+
+            Text {
+                text: "Edition: KITE_OS™ 1.0 (Arch / CachyOS x86-64-v3) • Source: github.com/KianRasti/KITE_OS_by_KITECH"
+                color: StudioTheme.textSecondary
+                font.pixelSize: 12
+                wrapMode: Text.WordWrap
+                Layout.fillWidth: true
+            }
+        }
+
+        GlassCard {
             title: "HP EliteBook Folio 9480m Hardware"
             subtitle: "4th Gen Haswell ULT • Intel HD Graphics 4400 GT2"
 

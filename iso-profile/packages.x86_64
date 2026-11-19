@@ -59,12 +59,19 @@ hyprland
 quickshell
 qt6-base
 qt6-declarative
+qt6-wayland
+qt6-svg
 xdg-desktop-portal-hyprland
+xdg-user-dirs
 polkit
+foot
 kitty
 thunar
 tumbler
 gvfs
+jq
+brightnessctl
+wl-clipboard
 ttf-dejavu
 noto-fonts
 

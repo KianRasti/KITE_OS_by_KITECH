@@ -136,8 +136,9 @@ run_cmd mkdir -p "${SHARE_ROOT}/hypr" "${SHARE_ROOT}/quickshell/components" \
     "${SHARE_ROOT}/settings/components" "${SHARE_ROOT}/settings/pages" \
     "${SHARE_ROOT}/preview" "${BIN_DIR}" "${APPS_DIR}"
 
-# 1. Stage Hyprland configs
-for f in "${SCRIPT_DIR}/hypr/"*.conf; do
+# 1. Stage Hyprland configs (.conf + .lua)
+for f in "${SCRIPT_DIR}/hypr/"*.conf "${SCRIPT_DIR}/hypr/"*.lua; do
+    [ -f "${f}" ] || continue
     run_cmd install -m 644 "${f}" "${SHARE_ROOT}/hypr/"
 done
 
@@ -194,7 +195,8 @@ done
 deploy_config_tree() {
     local cfg_root="$1"
     run_cmd mkdir -p "${cfg_root}/hypr" "${cfg_root}/quickshell/components" "${cfg_root}/kite-os"
-    for f in "${SCRIPT_DIR}/hypr/"*.conf; do
+    for f in "${SCRIPT_DIR}/hypr/"*.conf "${SCRIPT_DIR}/hypr/"*.lua; do
+        [ -f "${f}" ] || continue
         run_cmd install -m 644 "${f}" "${cfg_root}/hypr/"
     done
     for f in "${SCRIPT_DIR}/quickshell/"*.qml; do

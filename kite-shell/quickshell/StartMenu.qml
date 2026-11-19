@@ -221,12 +221,22 @@ PanelWindow {
                 Layout.fillWidth: true
                 spacing: 8
 
-                Text {
-                    text: Quickshell.env("USER") || "kite"
-                    color: "#E2E8F0"
-                    font.pixelSize: 12
-                    font.weight: Font.DemiBold
+                ColumnLayout {
                     Layout.fillWidth: true
+                    spacing: 1
+
+                    Text {
+                        text: Quickshell.env("USER") || "kite"
+                        color: "#E2E8F0"
+                        font.pixelSize: 12
+                        font.weight: Font.DemiBold
+                    }
+
+                    Text {
+                        text: "KITE_OS™ • Built by KITech (kian.kitech.info)"
+                        color: "#64748B"
+                        font.pixelSize: 10
+                    }
                 }
 
                 Button {

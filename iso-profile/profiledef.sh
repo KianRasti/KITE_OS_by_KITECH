@@ -3,8 +3,8 @@
 
 iso_name="kite-os-folio9480"
 iso_label="KITE_OS_$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y%m)"
-iso_publisher="KITE_OS Project <https://github.com/kitech/kite-os>"
-iso_application="KITE_OS Live/Install Medium (HP EliteBook Folio 9480m x86-64-v3)"
+iso_publisher="KITech (Kian Rasti) <https://kian.kitech.info>"
+iso_application="KITE_OS Live/Install Medium — Built by KITech (HP EliteBook Folio 9480m x86-64-v3)"
 iso_version="$(date --date="@${SOURCE_DATE_EPOCH:-$(date +%s)}" +%Y.%m.%d)"
 install_dir="arch"
 buildmodes=('iso')
@@ -23,4 +23,5 @@ file_permissions=(
   ["/root/customize_airootfs.sh"]="0:0:755"
   ["/usr/local/bin/"]="0:0:755"
   ["/usr/local/bin/kite-postinstall-hook"]="0:0:755"
+  ["/usr/local/bin/kite-session"]="0:0:755"
 )

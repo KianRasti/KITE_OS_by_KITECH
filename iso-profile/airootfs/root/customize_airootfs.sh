@@ -21,15 +21,28 @@ for component in kite-hw-tune kite-shell kite-bridge kite-ai installer; do
   fi
 done
 
-if [[ -d /etc/skel/.config && -d /home/kite ]]; then
-  mkdir -p /home/kite/.config
-  cp -a /etc/skel/.config/. /home/kite/.config/
-  if id kite >/dev/null 2>&1; then
-    chown -R kite:kite /home/kite/.config || true
-  fi
+# Ensure /etc/skel/.bash_profile launches kite-session automatically on tty1 (inherited by installed users)
+mkdir -p /etc/skel
+if ! grep -q 'kite-session' /etc/skel/.bash_profile 2>/dev/null; then
+  cat <<'EOF' >> /etc/skel/.bash_profile
+[[ -z "${WAYLAND_DISPLAY:-}" && "$(tty)" == "/dev/tty1" ]] && exec /usr/local/bin/kite-session
+EOF
 fi
 
-# Live ISO convenience: passwordless root/kite + tty1 autologin into Hyprland
+# Ensure live user 'kite' and /home/kite exist at ISO build time
+if ! id kite >/dev/null 2>&1; then
+  useradd -m -G wheel,video,audio,render,kvm -s /bin/bash -c "KITE_OS Live User" kite || true
+fi
+mkdir -p /home/kite/.config
+if [[ -d /etc/skel/.config ]]; then
+  cp -a /etc/skel/.config/. /home/kite/.config/
+fi
+cp -a /etc/skel/.bash_profile /home/kite/.bash_profile
+if id kite >/dev/null 2>&1; then
+  chown -R kite:kite /home/kite || true
+fi
+
+# Live ISO convenience: passwordless root/kite + tty1 autologin into kite-session
 passwd -d root >/dev/null 2>&1 || true
 if id kite >/dev/null 2>&1; then
   passwd -d kite >/dev/null 2>&1 || true
@@ -39,12 +52,6 @@ if id kite >/dev/null 2>&1; then
 ExecStart=
 ExecStart=-/sbin/agetty -o '-p -f -- \\u' --noclear --autologin kite %I $TERM
 EOF
-  if [[ -d /home/kite ]] && ! grep -q 'exec Hyprland' /home/kite/.bash_profile 2>/dev/null; then
-    cat <<'EOF' >> /home/kite/.bash_profile
-[[ -z "${WAYLAND_DISPLAY:-}" && "$(tty)" == "/dev/tty1" ]] && exec Hyprland
-EOF
-    chown kite:kite /home/kite/.bash_profile || true
-  fi
 fi
 
 if command -v systemctl >/dev/null 2>&1; then

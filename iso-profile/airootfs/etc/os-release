@@ -1,0 +1,13 @@
+NAME="KITE_OS"
+PRETTY_NAME="KITE_OS 1.0 (Built by KITech)"
+ID=kite-os
+ID_LIKE=arch
+BUILD_ID=rolling
+ANSI_COLOR="38;2;56;189;248"
+HOME_URL="https://kian.kitech.info"
+DOCUMENTATION_URL="https://portfolio.kitech.info"
+SUPPORT_URL="https://github.com/KianRasti/KITE_OS_by_KITECH/issues"
+BUG_REPORT_URL="https://github.com/KianRasti/KITE_OS_by_KITECH/issues"
+VENDOR_NAME="KITech"
+VENDOR_URL="https://portfolio.kitech.info"
+LOGO=kite-os

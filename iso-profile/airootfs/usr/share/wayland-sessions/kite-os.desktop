@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=KITE_OS (Built by KITech)
+Comment=KITE_OS Windows 11 Glass Desktop Session (Hyprland + Quickshell) — Built by KITech
+Exec=/usr/local/bin/kite-session
+Type=Application
+DesktopNames=Hyprland

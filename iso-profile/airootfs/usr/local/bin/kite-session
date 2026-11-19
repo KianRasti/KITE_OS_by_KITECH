@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# KITE_OS Session Launcher — Built by KITech (https://kian.kitech.info)
+# Automatically applies Intel Haswell HD 4400 pins on Folio 9480m hardware,
+# and clean Wayland/Aquamarine defaults inside VMs (VMware, QEMU, VirtualBox).
+set -euo pipefail
+
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/kite-os"
+mkdir -p "${STATE_DIR}"
+
+# 1. Self-heal user shell configs from /etc/skel or /usr/local/share/kite-shell
+CFG_DIR="${XDG_CONFIG_HOME:-$HOME/.config}"
+if [[ ! -f "${CFG_DIR}/hypr/hyprland.lua" || ! -f "${CFG_DIR}/quickshell/shell.qml" ]]; then
+  mkdir -p "${CFG_DIR}/hypr" "${CFG_DIR}/quickshell/components" "${CFG_DIR}/kite-os"
+  if [[ -d /etc/skel/.config ]]; then
+    cp -an /etc/skel/.config/. "${CFG_DIR}/" 2>/dev/null || true
+  fi
+  if [[ -d /usr/local/share/kite-shell/hypr ]]; then
+    cp -an /usr/local/share/kite-shell/hypr/. "${CFG_DIR}/hypr/" 2>/dev/null || true
+  fi
+  if [[ -d /usr/local/share/kite-shell/quickshell ]]; then
+    cp -an /usr/local/share/kite-shell/quickshell/. "${CFG_DIR}/quickshell/" 2>/dev/null || true
+  fi
+fi
+
+# 2. Hardware-aware GPU environment
+is_intel_gpu=0
+for vendor_file in /sys/class/drm/card*/device/vendor; do
+  if [[ -r "${vendor_file}" ]] && grep -qi '^0x8086' "${vendor_file}"; then
+    is_intel_gpu=1
+    break
+  fi
+done
+
+if [[ "${is_intel_gpu}" -eq 1 ]]; then
+  export MESA_LOADER_DRIVER_OVERRIDE=crocus
+  export LIBVA_DRIVER_NAME=i965
+else
+  # Virtualized GPU (VMware vmwgfx / QEMU / VirtualBox): avoid Haswell-only overrides
+  unset MESA_LOADER_DRIVER_OVERRIDE || true
+  unset LIBVA_DRIVER_NAME || true
+  export AQ_NO_ATOMIC=1
+  export WLR_NO_HARDWARE_CURSORS=1
+fi
+
+export XDG_CURRENT_DESKTOP=Hyprland
+export XDG_SESSION_TYPE=wayland
+export XDG_SESSION_DESKTOP=Hyprland
+export QT_QPA_PLATFORM="wayland;xcb"
+export QT_AUTO_SCREEN_SCALE_FACTOR=1
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+
+# 3. Ensure Quickshell (KITE_OS Glass UI) launches once Wayland socket is ready
+(
+  for _ in $(seq 1 40); do
+    sock="$(find "${XDG_RUNTIME_DIR:-/run/user/$(id -u)}" -maxdepth 1 -name 'wayland-*' ! -name '*.lock' 2>/dev/null | sort | head -n 1 || true)"
+    if [[ -n "${sock}" ]]; then
+      export WAYLAND_DISPLAY="$(basename "${sock}")"
+      sleep 0.4
+      if command -v kite-settings >/dev/null 2>&1; then
+        kite-settings sync --no-reload >>"${STATE_DIR}/session.log" 2>&1 || true
+      fi
+      if command -v quickshell >/dev/null 2>&1 && ! pgrep -u "$(id -u)" -x quickshell >/dev/null 2>&1; then
+        quickshell -p "${CFG_DIR}/quickshell/shell.qml" >>"${STATE_DIR}/quickshell.log" 2>&1 &
+      fi
+      break
+    fi
+    sleep 0.25
+  done
+) &
+
+# 4. Launch Hyprland compositor
+if command -v start-hyprland >/dev/null 2>&1; then
+  exec start-hyprland >>"${STATE_DIR}/session.log" 2>&1
+else
+  exec Hyprland >>"${STATE_DIR}/session.log" 2>&1
+fi
