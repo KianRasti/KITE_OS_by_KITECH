@@ -21,8 +21,8 @@ PanelWindow {
         right: 24
     }
 
-    implicitWidth: 440
-    implicitHeight: 260
+    implicitWidth: Math.min(420, Math.max(320, (screen ? screen.width : 1280) - 24))
+    implicitHeight: Math.min(250, Math.max(200, (screen ? screen.height : 720) - 96))
     color: "transparent"
     WlrLayershell.namespace: "quickshell"
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand

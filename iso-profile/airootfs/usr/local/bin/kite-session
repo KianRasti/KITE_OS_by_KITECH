@@ -63,6 +63,13 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
     if [[ -n "${sock}" ]]; then
       export WAYLAND_DISPLAY="$(basename "${sock}")"
       sleep 0.4
+      if [[ "${is_intel_gpu}" -eq 0 ]] && command -v hyprctl >/dev/null 2>&1; then
+        # VMware/QEMU default to 800x600; switch Virtual-1 to Folio 9480m widescreen resolution
+        hyprctl keyword monitor "Virtual-1,1600x900@60,0x0,1" >>"${STATE_DIR}/session.log" 2>&1 \
+          || hyprctl keyword monitor "Virtual-1,1366x768@60,0x0,1" >>"${STATE_DIR}/session.log" 2>&1 \
+          || true
+        sleep 0.3
+      fi
       if command -v kite-settings >/dev/null 2>&1; then
         kite-settings sync --no-reload >>"${STATE_DIR}/session.log" 2>&1 || true
       fi

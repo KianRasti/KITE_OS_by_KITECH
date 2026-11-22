@@ -22,8 +22,8 @@ PanelWindow {
         left: shellState.taskbarAlignment === "left" ? 12 : 0
     }
 
-    implicitWidth: 620
-    implicitHeight: 620
+    implicitWidth: Math.min(580, Math.max(360, (screen ? screen.width : 1280) - 24))
+    implicitHeight: Math.min(520, Math.max(340, (screen ? screen.height : 720) - 72))
     color: "transparent"
     WlrLayershell.namespace: "quickshell"
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.OnDemand
@@ -136,6 +136,49 @@ PanelWindow {
                 Button {
                     text: startWindow.showAllApps ? "Pinned" : "All apps >"
                     onClicked: startWindow.showAllApps = !startWindow.showAllApps
+                }
+            }
+
+            // Built-in Pinned KITE_OS Quick Launchers (always available, zero config)
+            RowLayout {
+                Layout.fillWidth: true
+                spacing: 8
+
+                Repeater {
+                    model: [
+                        { label: "Terminal", cmd: "sh -c 'command -v foot >/dev/null 2>&1 && exec foot || exec kitty'" },
+                        { label: "Files", cmd: "sh -c 'command -v thunar >/dev/null 2>&1 && exec thunar || exec dolphin'" },
+                        { label: "Settings", cmd: "kite-settings" },
+                        { label: "Install KITE_OS", cmd: "sh -c 'command -v calamares >/dev/null 2>&1 && exec pkexec calamares || exec foot'" }
+                    ]
+                    delegate: Rectangle {
+                        required property var modelData
+                        Layout.fillWidth: true
+                        height: 36
+                        radius: 8
+                        color: quickMouse.containsMouse ? Qt.rgba(0.22, 0.74, 0.97, 0.24) : Qt.rgba(1, 1, 1, 0.08)
+                        border.width: 1
+                        border.color: quickMouse.containsMouse ? Qt.rgba(0.22, 0.74, 0.97, 0.55) : Qt.rgba(1, 1, 1, 0.14)
+
+                        Text {
+                            anchors.centerIn: parent
+                            text: modelData.label
+                            color: "#F8FAFC"
+                            font.pixelSize: 12
+                            font.weight: Font.Medium
+                        }
+
+                        MouseArea {
+                            id: quickMouse
+                            anchors.fill: parent
+                            hoverEnabled: true
+                            cursorShape: Qt.PointingHandCursor
+                            onClicked: {
+                                startWindow.shellState.closeOverlays()
+                                startWindow.shellState.launchCommand(modelData.cmd)
+                            }
+                        }
+                    }
                 }
             }
 

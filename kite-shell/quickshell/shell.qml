@@ -48,6 +48,15 @@ ShellRoot {
 
     Variants {
         model: Quickshell.screens
+        delegate: Wallpaper {
+            required property ShellScreen modelData
+            screen: modelData
+            shellState: shellState
+        }
+    }
+
+    Variants {
+        model: Quickshell.screens
         delegate: Taskbar {
             required property ShellScreen modelData
             screen: modelData
